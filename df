@@ -1,0 +1,103 @@
+[1mdiff --git a/src/main/java/oit/is/z1790/kaizai/janken/controller/JankenController.java b/src/main/java/oit/is/z1790/kaizai/janken/controller/JankenController.java[m
+[1mindex e9c87d3..0c6bf6f 100644[m
+[1m--- a/src/main/java/oit/is/z1790/kaizai/janken/controller/JankenController.java[m
+[1m+++ b/src/main/java/oit/is/z1790/kaizai/janken/controller/JankenController.java[m
+[36m@@ -7,6 +7,8 @@[m [mimport org.springframework.web.bind.annotation.PathVariable;[m
+ import org.springframework.web.bind.annotation.PostMapping;[m
+ import org.springframework.web.bind.annotation.RequestParam;[m
+ [m
+[32m+[m[32mimport oit.is.z1790.kaizai.janken.model.Janken;[m
+[32m+[m
+ @Controller[m
+ public class JankenController {[m
+   @PostMapping("/janken")[m
+[36m@@ -15,8 +17,15 @@[m [mpublic class JankenController {[m
+     return "janken.html";[m
+   }[m
+ [m
+[31m-  @GetMapping("/janken")[m
+[31m-  public String janken() {[m
+[32m+[m[32m  @GetMapping("/jankengame")[m
+[32m+[m[32m  public String jankengame(@RequestParam String userHand, ModelMap model) {[m
+[32m+[m[32m    Janken janken = new Janken();[m
+[32m+[m[32m    String cpuHand = "gu";[m
+[32m+[m[32m    String winer;[m
+[32m+[m[32m    winer = janken.pon(cpuHand, userHand);[m
+[32m+[m[32m    model.addAttribute("userHand", userHand);[m
+[32m+[m[32m    model.addAttribute("cpuHand", cpuHand);[m
+[32m+[m[32m    model.addAttribute("winer", winer);[m
+     return "janken.html";[m
+   }[m
+ [m
+[1mdiff --git a/src/main/java/oit/is/z1790/kaizai/janken/model/Janken.java b/src/main/java/oit/is/z1790/kaizai/janken/model/Janken.java[m
+[1mindex f98823d..a05b232 100644[m
+[1m--- a/src/main/java/oit/is/z1790/kaizai/janken/model/Janken.java[m
+[1m+++ b/src/main/java/oit/is/z1790/kaizai/janken/model/Janken.java[m
+[36m@@ -3,8 +3,7 @@[m [mpackage oit.is.z1790.kaizai.janken.model;[m
+ public class Janken {[m
+   String userName;[m
+ [m
+[31m-  public Janken(String userName) {[m
+[31m-    this.userName = userName;[m
+[32m+[m[32m  public Janken() {[m
+   }[m
+ [m
+   public String getUserName() {[m
+[36m@@ -15,4 +14,33 @@[m [mpublic class Janken {[m
+     this.userName = userName;[m
+   }[m
+ [m
+[32m+[m[32m  public String pon(String cpu, String user) {[m
+[32m+[m[32m    if (cpu.equals("pa")) {[m
+[32m+[m[32m      if (user.equals("gu")) {[m
+[32m+[m[32m        return "You Lose";[m
+[32m+[m[32m      } else if (user.equals("choki")) {[m
+[32m+[m[32m        return "You Win";[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        return "drow";[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } else if (cpu.equals("choki")) {[m
+[32m+[m[32m      if (user.equals("pa")) {[m
+[32m+[m[32m        return "You Lose";[m
+[32m+[m[32m      } else if (user.equals("gu")) {[m
+[32m+[m[32m        return "You Win";[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        return "drow";[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } else if (cpu.equals("gu")) {[m
+[32m+[m[32m      if (user.equals("pa")) {[m
+[32m+[m[32m        return "You Win";[m
+[32m+[m[32m      } else if (user.equals("choki")) {[m
+[32m+[m[32m        return "You Lose";[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        return "drow";[m
+[32m+[m[32m      }[m
+[32m+[m[32m    }[m
+[32m+[m[32m    return "";[m
+[32m+[m[32m  }[m
+[32m+[m
+ }[m
+[1mdiff --git a/src/main/resources/templates/janken.html b/src/main/resources/templates/janken.html[m
+[1mindex de7680a..5c27488 100644[m
+[1m--- a/src/main/resources/templates/janken.html[m
+[1m+++ b/src/main/resources/templates/janken.html[m
+[36m@@ -103,6 +103,19 @@[m
+       <img src="img/janken_pa.png" alt="パー">[m
+     </div>[m
+     <br>[m
+[32m+[m[32m    <p>[m
+[32m+[m[32m      <a href="/jankengame?userHand=gu">グー </a>[m
+[32m+[m[32m      <a href="/jankengame?userHand=choki">チョキ </a>[m
+[32m+[m[32m      <a href="/jankengame?userHand=pa">パー</a>[m
+[32m+[m[32m    </p>[m
+[32m+[m[32m    <div th:if="${userHand}">[m
+[32m+[m[32m      <p>あなたの手[[${userHand}]][m
+[32m+[m[32m      </p>[m
+[32m+[m[32m      <p>相手の手[[${cpuHand}]][m
+[32m+[m[32m      </p>[m
+[32m+[m[32m      <p>結果[[${winer}]]</p>[m
+[32m+[m
+[32m+[m[32m    </div>[m
+ [m
+     <br>[m
+   </center>[m

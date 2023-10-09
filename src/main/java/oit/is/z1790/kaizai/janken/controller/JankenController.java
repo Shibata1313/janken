@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import oit.is.z1790.kaizai.janken.model.Janken;
+
 @Controller
 public class JankenController {
   @PostMapping("/janken")
@@ -15,8 +17,15 @@ public class JankenController {
     return "janken.html";
   }
 
-  @GetMapping("/janken")
-  public String janken() {
+  @GetMapping("/jankengame")
+  public String jankengame(@RequestParam String userHand, ModelMap model) {
+    Janken janken = new Janken();
+    String cpuHand = "gu";
+    String winer;
+    winer = janken.pon(cpuHand, userHand);
+    model.addAttribute("userHand", userHand);
+    model.addAttribute("cpuHand", cpuHand);
+    model.addAttribute("winer", winer);
     return "janken.html";
   }
 
