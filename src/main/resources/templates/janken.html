@@ -103,6 +103,19 @@
       <img src="img/janken_pa.png" alt="パー">
     </div>
     <br>
+    <p>
+      <a href="/jankengame?userHand=gu">グー </a>
+      <a href="/jankengame?userHand=choki">チョキ </a>
+      <a href="/jankengame?userHand=pa">パー</a>
+    </p>
+    <div th:if="${userHand}">
+      <p>あなたの手[[${userHand}]]
+      </p>
+      <p>相手の手[[${cpuHand}]]
+      </p>
+      <p>結果[[${winer}]]</p>
+
+    </div>
 
     <br>
   </center>
