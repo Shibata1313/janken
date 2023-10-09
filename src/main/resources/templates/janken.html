@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>じゃんけんゲーム</title>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 20px;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    h2 {
+      color: #666;
+    }
+
+    center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .icon {
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+      margin-left: 5px;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+    }
+
+    .image-container img {
+      width: 200px;
+      margin: 0 10px;
+    }
+
+    button.start {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button.start:hover {
+      background-color: #0056b3;
+    }
+
+    ol {
+      color: #444;
+      padding-left: 20px;
+    }
+
+    ul {
+      color: #555;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    font[color="red"] {
+      color: #ff0000;
+    }
+
+    font[color="green"] {
+      color: #00cc00;
+    }
+
+    font[color="blue"] {
+      color: #0000ff;
+    }
+  </style>
+</head>
+
+<body>
+  <center>
+    <h1>じゃんけんゲーム</h1>
+    <div th:if="${userName}">
+      <p>Hi [[${userName}]]</p>
+    </div>
+    <br>
+    <div class="image-container">
+      <img src="./img/janken_gu.png" alt="グー">
+      <img src="./img/janken_choki.png" alt="チョキ">
+      <img src="img/janken_pa.png" alt="パー">
+    </div>
+    <br>
+
+    <br>
+  </center>
+  <h2>[ルール説明]</h2>
+  <ol>
+    <li>プレイヤーは、<font color="red"><span>グー <img class="icon" src="./img/janken_gu.png" alt="グー"></span></font>、<font
+        color="green"><span>チョキ <img class="icon" src="./img/janken_choki.png" alt="チョキ"></span></font>、<font
+        color="blue"><span>パー <img class="icon" src="./img/janken_pa.png" alt="パー"></span></font>のいずれかの手を選びます。</li>
+    <li>プレイヤーが手を選んだら、同時にカウントダウンを行い、<strong>「じゃんけん、ぽん！」</strong>と表示され、両プレイヤーが選んだ手を表示されます。</li>
+    <li>手を出した後、勝者を決定します。以下が勝敗のルールです:
+      <ul>
+        <li>
+          <font color="red"><span>グー <img class="icon" src="./img/janken_gu.png" alt="グー"></span></font>は<font
+            color="green"><span>チョキ <img class="icon" src="./img/janken_choki.png" alt="チョキ"></span></font>に勝つ
+        </li>
+        <li>
+          <font color="green"><span>チョキ <img class="icon" src="./img/janken_choki.png" alt="チョキ"></span></font>は<font
+            color="blue"><span>パー <img class="icon" src="./img/janken_pa.png" alt="パー"></span></font>に勝つ
+        </li>
+        <li>
+          <font color="blue"><span>パー <img class="icon" src="./img/janken_pa.png" alt="パー"></span></font>は<font
+            color="red"><span>グー <img class="icon" src="./img/janken_gu.png" alt="グー"></span>
+          </font>に勝つ
+        </li>
+      </ul>
+    </li>
+    <li>もし両プレイヤーが同じ手を出した場合、<strong>引き分け</strong>となり、再度じゃんけんを行います。</li>
+    <li>勝者が決まるまで、じゃんけんを続けます。</li>
+  </ol>
+</body>
+
+</html>
