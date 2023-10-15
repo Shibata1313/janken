@@ -1,4 +1,4 @@
-package oit.is.z1790.kaizai.janken.model;
+package oit.is.z1790.kaizi.janken.model;
 
 public class Janken {
   String userName;
