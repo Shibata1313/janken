@@ -62,19 +62,8 @@
       background-color: #0056b3;
     }
 
-    ol {
-      color: #444;
-      padding-left: 20px;
-    }
 
-    ul {
-      color: #555;
-      padding-left: 20px;
-    }
 
-    li {
-      margin-bottom: 10px;
-    }
 
     font[color="red"] {
       color: #ff0000;
@@ -91,34 +80,39 @@
 </head>
 
 <body>
-  <center>
-    <h1>じゃんけんゲーム</h1>
-    <div th:if="${userName}">
-      <p>Hi [[${userName}]]</p>
-    </div>
-    <br>
-    <div class="image-container">
-      <img src="./img/janken_gu.png" alt="グー">
-      <img src="./img/janken_choki.png" alt="チョキ">
-      <img src="img/janken_pa.png" alt="パー">
-    </div>
-    <br>
-    <p>
-      <a href="/jankengame?userHand=gu">グー </a>
-      <a href="/jankengame?userHand=choki">チョキ </a>
-      <a href="/jankengame?userHand=pa">パー</a>
+  <a href="/logout">ログアウト</a>
+  <h1>じゃんけんゲーム</h1>
+  <p>エントリー</p>
+  <div th:if="${entry}">
+    <ul>
+      <li th:each="user : ${entry.users}">[[${user}]]</li>
+    </ul>
+  </div>
+  <div th:if="${login_user}">
+    <p>Hi [[${login_user}]]</p>
+  </div>
+  <br>
+  <div class="image-container">
+    <img src="./img/janken_gu.png" alt="グー">
+    <img src="./img/janken_choki.png" alt="チョキ">
+    <img src="img/janken_pa.png" alt="パー">
+  </div>
+  <br>
+  <p>
+    <a href="/jankengame?userHand=gu">グー </a>
+    <a href="/jankengame?userHand=choki">チョキ </a>
+    <a href="/jankengame?userHand=pa">パー</a>
+  </p>
+  <div th:if="${userHand}">
+    <p>あなたの手[[${userHand}]]
     </p>
-    <div th:if="${userHand}">
-      <p>あなたの手[[${userHand}]]
-      </p>
-      <p>相手の手[[${cpuHand}]]
-      </p>
-      <p>結果[[${winer}]]</p>
+    <p>相手の手[[${cpuHand}]]
+    </p>
+    <p>結果[[${winer}]]</p>
 
-    </div>
+  </div>
 
-    <br>
-  </center>
+  <br>
   <h2>[ルール説明]</h2>
   <ol>
     <li>プレイヤーは、<font color="red"><span>グー <img class="icon" src="./img/janken_gu.png" alt="グー"></span></font>、<font
