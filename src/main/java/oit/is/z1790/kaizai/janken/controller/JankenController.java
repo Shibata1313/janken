@@ -5,6 +5,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.z1790.kaizai.janken.model.Janken;
@@ -14,6 +15,11 @@ public class JankenController {
   @PostMapping("/janken")
   public String janken(@RequestParam String userName, ModelMap model) {
     model.addAttribute("userName", userName);
+    return "janken.html";
+  }
+
+  @GetMapping("/janken")
+  public String janken() {
     return "janken.html";
   }
 
