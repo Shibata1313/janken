@@ -1,4 +1,4 @@
-package oit.is.z1790.kaizi.janken.controller;
+package oit.is.z1790.kaizai.janken.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import oit.is.z1790.kaizi.janken.model.Janken;
+import oit.is.z1790.kaizai.janken.model.Janken;
 
 @Controller
 public class JankenController {
