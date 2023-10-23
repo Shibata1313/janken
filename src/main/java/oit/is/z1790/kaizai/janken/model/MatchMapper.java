@@ -10,24 +10,26 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface MatchMapper {
 
-  @Select("SELECT id,userName,chamberName from chamber where id = #{id}")
-  User selectById(int id);
+  // @Select("SELECT id,name from user where id = #{id}")
+  // User selectById(int id);
 
   /**
    * #{userName}などはinsertの引数にあるChamberクラスのフィールドを表しています 引数に直接String
    * userNameなどと書いてもいけるはず
    * 下記のOptionsを指定すると，insert実行時にAuto incrementされたIDの情報を取得できるようになる useGeneratedKeys
    * = true -> Keyは自動生成されることを表す keyColumn : keyになるテーブルのカラム名 keyProperty :
-   * keyになるJavaクラスのフィールド名
+   * keyになるJavaクラスのフィールド名c3w3w3f
    *
    * @param chamber
    */
-  @Insert("INSERT INTO chamber (userName,chamberName) VALUES (#{userName},#{chamberName});")
-  @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
-  void insertChamber(User chamber);
 
-  @Select("SELECT * from chamber where chamberName = #{chamberName}")
-  ArrayList<User> selectAllByChamberName(String chamberName);
+  // @Insert("INSERT INTO chamber (userName,chamberName) VALUES
+  // (#{userName},#{chamberName});")
+  // @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
+  // void insertChamber(User chamber);
+
+  // @Select("SELECT * from users where name = #{name}")
+  // ArrayList<User> selectAllByUserName(String name);
 
   /**
    * DBのカラム名とjavaクラスのフィールド名が同じ場合はそのまま代入してくれる（大文字小文字の違いは無視される）
@@ -36,13 +38,11 @@ public interface MatchMapper {
    * @return
    */
 
-  // @Select("SELECT
-  // chamber.userName,chamber.chamberName,userinfo.age,userinfo.height, from
-  // chamber JOIN userinfo ON chamber.userName=userinfo.userName;")
-  // ArrayList<ChamberUser> selectAllChamberUser();
+  @Select("SELECT matches.id, matches.user1, matches.user2, matches.user1Hand, matches.user2Hand FROM matches")
+  ArrayList<Match> selectAllMatch();
 
   // @Insert("INSERT INTO userinfo (userName,age,height) VALUES
   // (#{userName},#{age},#{height});")
-  // void insertUserInfo(UserInfo userinfo);
+  // void insertUserInfo(User userinfo);
 
 }

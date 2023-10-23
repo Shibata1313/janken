@@ -84,13 +84,20 @@
   <h1>じゃんけんゲーム</h1>
   <p>エントリー</p>
   <p th:if="${users1}">
-  <div th:each="user:${users1}">
-    <ul>
-      <li>[[${user.name}]]</li>
-    </ul>
+    <li th:each="user : ${users1}"><a th:href="@{/match(id=${user.id})}"> [[${user.name}]]</a></li>
+  </p>
+
+
+  <h2>試合結果</h2>
+  <p th:if="${matches1}">
+  <div th:each="match:${matches1}">
+    <p>id:[[${match.id}]] user1:[[${match.user1}]] user2:[[${match.user2}]] user1の手:[[${match.user1Hand}]]
+      user2の手:[[${match.user2Hand}]]
+    </p>
 
   </div>
   </p>
+
 
   <br>
   <div class="image-container">

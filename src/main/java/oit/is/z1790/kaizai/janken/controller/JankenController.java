@@ -30,6 +30,9 @@ public class JankenController {
   @Autowired
   private UserMapper userMapper;
 
+  @Autowired
+  private MatchMapper matchMapper;
+
   @PostMapping("/janken")
   public String janken(@RequestParam String userName, ModelMap model) {
     model.addAttribute("userName", userName);
@@ -44,7 +47,9 @@ public class JankenController {
     model.addAttribute("entry", this.entry);
     model.addAttribute("login_user", loginUser);
     ArrayList<User> users1 = userMapper.selectAllUser();
+    ArrayList<Match> matches1 = matchMapper.selectAllMatch();
     model.addAttribute("users1", users1);
+    model.addAttribute("matches1", matches1);
 
     return "janken.html";
   }
@@ -61,4 +66,10 @@ public class JankenController {
     return "janken.html";
   }
 
-}
+  @GetMapping("/match")
+  public String match(@PathVariable Integer id, ModelMap model) {
+
+    return "match.html";
+  }
+
+} 
