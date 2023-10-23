@@ -83,14 +83,15 @@
   <a href="/logout">ログアウト</a>
   <h1>じゃんけんゲーム</h1>
   <p>エントリー</p>
-  <div th:if="${entry}">
+  <p th:if="${users1}">
+  <div th:each="user:${users1}">
     <ul>
-      <li th:each="user : ${entry.users}">[[${user}]]</li>
+      <li>[[${user.name}]]</li>
     </ul>
+
   </div>
-  <div th:if="${login_user}">
-    <p>Hi [[${login_user}]]</p>
-  </div>
+  </p>
+
   <br>
   <div class="image-container">
     <img src="./img/janken_gu.png" alt="グー">
