@@ -41,8 +41,8 @@ public interface MatchMapper {
   @Select("SELECT matches.id, matches.user1, matches.user2, matches.user1Hand, matches.user2Hand FROM matches")
   ArrayList<Match> selectAllMatch();
 
-  // @Insert("INSERT INTO userinfo (userName,age,height) VALUES
-  // (#{userName},#{age},#{height});")
-  // void insertUserInfo(User userinfo);
+  @Insert("INSERT INTO matches (user1,user2,user1Hand,user2Hand) VALUES(#{user1},#{user2},#{user1Hand},#{user2Hand})")
+
+  void insertUserInfo(Match matches);
 
 }

@@ -27,7 +27,7 @@ public class JankenController {
   @Autowired
   private Entry entry;
 
-  private String playerName;
+  private User user;
 
   @Autowired
   private UserMapper userMapper;
@@ -44,7 +44,7 @@ public class JankenController {
   @GetMapping("/janken")
   @Transactional
   public String janken(ModelMap model, Principal prin) {
-    playerName = prin.getName(); // ログインユーザ情報
+    String playerName = prin.getName(); // ログインユーザ情報
     this.entry.addUser(playerName);
     model.addAttribute("entry", this.entry);
     model.addAttribute("login_user", playerName);
@@ -69,13 +69,32 @@ public class JankenController {
   }
 
   @GetMapping("/match")
-  public String match(@RequestParam Integer id, ModelMap model) {
-    User user = new User();
-    User player = new User();
+  public String match(@RequestParam Integer id, ModelMap model, Principal prin) {
+    String playerName = prin.getName();
     user = userMapper.selectById(id);
-    player = userMapper.selectByUserName(playerName);
     model.addAttribute("user", user);
-    model.addAttribute("player", player);
+    model.addAttribute("player", playerName);
+    return "match.html";
+  }
+
+  @GetMapping("/fight")
+  public String fight(@RequestParam Integer id, @RequestParam String hand, ModelMap model, Principal prin) {
+    String playerName = prin.getName();
+    Janken janken = new Janken();
+    Match match = new Match();
+    String cpuHand = "Gu";
+    String winer;
+    match.setUser1(userMapper.selectByUserName(playerName).getId());
+    match.setUser2(id);
+    match.setUser1Hand(hand);
+    match.setUser2Hand(cpuHand);
+    winer = janken.pon(cpuHand, hand);
+    model.addAttribute("hand", hand);
+    model.addAttribute("cpuHand", cpuHand);
+    model.addAttribute("winer", winer);
+    model.addAttribute("user", user);
+    model.addAttribute("player", playerName);
+    matchMapper.insertUserInfo(match);
     return "match.html";
   }
 
