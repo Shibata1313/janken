@@ -27,6 +27,8 @@ public class JankenController {
   @Autowired
   private Entry entry;
 
+  private String playerName;
+
   @Autowired
   private UserMapper userMapper;
 
@@ -42,10 +44,10 @@ public class JankenController {
   @GetMapping("/janken")
   @Transactional
   public String janken(ModelMap model, Principal prin) {
-    String loginUser = prin.getName(); // ログインユーザ情報
-    this.entry.addUser(loginUser);
+    playerName = prin.getName(); // ログインユーザ情報
+    this.entry.addUser(playerName);
     model.addAttribute("entry", this.entry);
-    model.addAttribute("login_user", loginUser);
+    model.addAttribute("login_user", playerName);
     ArrayList<User> users1 = userMapper.selectAllUser();
     ArrayList<Match> matches1 = matchMapper.selectAllMatch();
     model.addAttribute("users1", users1);
@@ -67,9 +69,14 @@ public class JankenController {
   }
 
   @GetMapping("/match")
-  public String match(@PathVariable Integer id, ModelMap model) {
-
+  public String match(@RequestParam Integer id, ModelMap model) {
+    User user = new User();
+    User player = new User();
+    user = userMapper.selectById(id);
+    player = userMapper.selectByUserName(playerName);
+    model.addAttribute("user", user);
+    model.addAttribute("player", player);
     return "match.html";
   }
 
-} 
+}

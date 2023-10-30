@@ -82,6 +82,7 @@
 <body>
   <a href="/logout">ログアウト</a>
   <h1>じゃんけんゲーム</h1>
+  <p> Hi [[${login_user}]] </p>
   <p>エントリー</p>
   <p th:if="${users1}">
     <li th:each="user : ${users1}"><a th:href="@{/match(id=${user.id})}"> [[${user.name}]]</a></li>
