@@ -15,26 +15,26 @@ public class Janken {
   }
 
   public String pon(String cpu, String user) {
-    if (cpu.equals("pa")) {
-      if (user.equals("gu")) {
+    if (cpu.equals("Pa")) {
+      if (user.equals("Gu")) {
         return "You Lose";
-      } else if (user.equals("choki")) {
+      } else if (user.equals("Choki")) {
         return "You Win";
       } else {
         return "drow";
       }
-    } else if (cpu.equals("choki")) {
-      if (user.equals("pa")) {
+    } else if (cpu.equals("Choki")) {
+      if (user.equals("Pa")) {
         return "You Lose";
-      } else if (user.equals("gu")) {
+      } else if (user.equals("Gu")) {
         return "You Win";
       } else {
         return "drow";
       }
-    } else if (cpu.equals("gu")) {
-      if (user.equals("pa")) {
+    } else if (cpu.equals("Gu")) {
+      if (user.equals("Pa")) {
         return "You Win";
-      } else if (user.equals("choki")) {
+      } else if (user.equals("Choki")) {
         return "You Lose";
       } else {
         return "drow";

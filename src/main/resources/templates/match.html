@@ -11,11 +11,25 @@
   <h1>Match</h1>
 
   <h2>
-    [[${player.name}]] vs [[${user.name}]]
+    [[${player}]] V.S. [[${user.name}]]
 
   </h2>
+  <p>
+    <a th:href="@{/fight(id=${user.id}, hand='Gu')}">グー </a>
+    <a th:href="@{/fight(id=${user.id}, hand='Choki')}">チョキ </a>
+    <a th:href="@{/fight(id=${user.id}, hand='Pa')}">パー</a>
+  </p>
 
+  <div th:if="${hand}">
+    <p>あなたの手[[${hand}]]
+    </p>
+    <p>相手の手[[${cpuHand}]]
+    </p>
+    <p>結果[[${winer}]]</p>
 
+  </div>
+
+  <a href="/janken">もどる</a>
 
 
 
